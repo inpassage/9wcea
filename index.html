@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NABIL ALMASHWALI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/logo.png" type="image/png">
+
+    <style>
+        /* تنسيق عام */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100%;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow-y: auto; /* لتفعيل التمرير */
+            background-image: url('	images/my poto.jpeg'); /* مسار الصورة */
+            background-size: cover; /* تغطية كاملة للشاشة */
+            background-position: center; /* توسيط الصورة */
+            background-attachment: fixed; /* تثبيت الخلفية */
+            position: relative;
+        }
+
+        /* إضافة التمويه على الخلفية */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* طبقة شفافة داكنة */
+            backdrop-filter: blur(20px); /* تمويه */
+            z-index: -1; /* خلف المحتوى */
+        }
+
+        .container-section {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8); /* التظليل الداكن */
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            z-index: 1;
+            margin-top: 70px;  /* تقليل المسافة من الأعلى */
+            margin-bottom: 70px; /* تقليل المسافة من الأسفل */
+			/* التأكد من محاذاة النصوص في باقي الأقسام إلى اليسار */
+ h2, h3, h4 {
+    text-align: left; /* محاذاة النصوص داخل العناصر */
+}
+        }
+
+        .profile-pic {
+            width: 350px;
+            height: 450px;
+            border-radius: 3%;
+            margin: 0 auto 20px;
+            border: 0px solid #4b8aff;
+            background: url('images/my poto.jpeg') center/cover no-repeat;
+        }
+
+        h1 {
+            font-size: 45px;
+			color: #fff;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 25px;
+			color: #fff;
+            margin-bottom: 20px;
+        }
+		
+		 h3 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+		
+        h4 {
+            font-size: 16px;
+            color: #ffcccb;
+            margin-bottom: 20px;
+        }
+
+
+        .social-icons {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* القائمة */
+		.event-section {
+            margin-top: 40px;
+        }
+		
+		 .event-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+		
+        .Lists-section {
+            margin-top: 40px;
+        }
+
+        .Lists-title {
+            
+            color: #fff;
+            margin-bottom: 20px;
+            cursor: pointer; /* إضافة cursor لتوضيح أنه قابل للضغط */
+        }
+
+
+.event:hover {
+            transform: scale(1.05);
+        }
+
+        .Lists-list {
+            display: none; /* إخفاء القائمة في البداية */
+            margin-top: 20px;
+        }
+
+        .event {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .event h3 {
+            margin: 0;
+            
+            
+        }
+
+        .toggle-btn {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-btn::before {
+            content: ' ▼ '; /* سهم لأسفل */
+           
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .toggle-btn.active::before {
+            content: ' ▲ '; /* سهم لأعلى */
+        }
+
+		 
+		 /* تنسيق الحاوية التي تحتوي على الفيديوهات */
+        .video-links-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+            width: 100%; /* العرض المناسب */
+            position: relative;
+        }
+
+    
+        .video-links {
+            display: flex;
+            gap: 10px; /* المسافة بين الفيديوهات */
+        }
+
+        .video-links a {
+            transition: transform 0.3s;
+        }
+
+        .video-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .video-links img {
+            width: 350px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* التحريك من اليمين لليسار */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0); /* بداية الحركة من اليمين */
+            }
+            100% {
+                transform: translateX(-100%); /* الانتقال الكامل لليسار بعد عرض الفيديوهات كلها */
+            }
+        }
+
+      
+
+        .video-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* التأكد من تكرار الفيديوهات بشكل متسلسل بدون توقف */
+        .video-links-wrapper {
+            display: flex;
+            animation: scroll-left 30s linear infinite; /* الحركة المستمرة */
+        }
+
+		
+		 
+		/* قائمة الدعم */
+		
+		.cop-section {
+            margin-top: 40px;
+        }
+		
+		 .cop-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .cop:hover {
+            transform: scale(1.05);
+        }
+		
+		
+        .coffee-cup {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .cup {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 255);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid #4b8aff;
+            color: #4b8aff; /* النص أزرق بشكل افتراضي */
+        }
+
+        .cup:hover {
+            transform: scale(1.1);
+        }
+
+        .cup.active {
+            background-color: #4b8aff; /* لون الأزرق عند الضغط */
+            color: #fff; /* لون النص أبيض عند الضغط */
+        }
+
+        .total-cups {
+            margin-top: 0px;
+            background-color: rgba(255, 255, 255, 255);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #4b8aff; /* النص أزرق بشكل افتراضي */
+            border: 2px solid #4b8aff;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .input-cups {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: none;
+            color: #4b8aff; /* النص أزرق داخل المدخل */
+            font-size: 20px;
+            text-align: center;
+            outline: none;
+            z-index: 1;
+        }
+
+        .input-cups:focus {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-donate {
+    background-color: #4b8aff; /* لون الزر الأزرق */
+    color: #fff; /* لون النص الأبيض */
+    width: 60px; /* نفس عرض الدوائر */
+    height: 60px; /* نفس ارتفاع الدوائر */
+    border: none; /* إزالة الحواف الافتراضية */
+    border-radius: 50%; /* لجعل الزر دائريًا */
+    cursor: pointer; /* شكل اليد عند التمرير */
+    font-size: 16px; /* حجم النص */
+    display: flex; /* لتوسيط النص */
+    justify-content: center; /* توسيط النص أفقيًا */
+    align-items: center; /* توسيط النص عموديًا */
+    transition: background-color 0.3s, transform 0.3s; /* تأثير عند التفاعل */
+}
+
+.btn-donate:hover {
+    background-color: #3a74cc; /* لون أغمق عند التمرير */
+    transform: scale(1.1); /* تكبير بسيط عند التمرير */
+}
+
+
+
+        .cup-image {
+            width: 70px;
+            height: 50px;
+        }
+    
+			/* قائمة الحقوق */
+	  .footer {
+            font-size: 14px;
+            color: #fff;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #ffcccb;
+            text-decoration: none;
+        }
+		
+
+    </style>
+</head>
+<body>
+
+	
+
+    <div class="container-section">
+        <div class="profile-pic"></div>
+        <h1>NABIL ALMASHWALI</h1>
+        <p>@9wcea</p>
+
+        <div class="social-icons">
+		            <!-- روابط الأيقونات الاجتماعية -->
+            <a href="https://facebook.com/9wcea" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://twitter.com/9wcea" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
+            </a>
+            <a href="https://instagram.com/9wcea" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
+            </a>
+            <a href="https://www.youtube.com/@9wcea" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/youtube.png" alt="YouTube">
+            </a>
+            <a href="https://t.me/9wcea" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/telegram.png" alt="Telegram">
+            </a>
+            <a href="https://www.snapchat.com/add/9wcea" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Telegram">
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=966538374056" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+            </a>
+               <!-- إضافة حساب Pinterest -->
+            <a href="https://www.pinterest.com/9wcea/" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/pinterest.png" alt="Pinterest">
+            </a>
+             <a href="https://www.tiktok.com/@9wcea" target="_blank">
+                <img src="https://img.icons8.com/?size=100&id=118638&format=png&color=FFFFFF" alt="Reddit">
+            </a>
+
+        </div>
+
+
+
+<!-- قائمة الفيديوهات المتحركة -->
+<div class="video-slider">
+<h2 ">مقاطع فيديو YouTube</h2>
+ </div>
+    <div class="video-links-container">
+        <div class="video-links-wrapper">
+            <div class="video-links">
+                <!-- فيديوهات مع روابط -->
+                
+				<a href="https://www.youtube.com/watch?v=xW4cHcHqRS4" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/xW4cHcHqRS4/maxresdefault.jpg" alt="فيديو 1">
+                </a>
+                <a href="https://www.youtube.com/watch?v=9_HaE9ptJ5U&t=1s" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/9_HaE9ptJ5U/maxresdefault.jpg" alt="فيديو 3">
+                </a>
+                <a href="https://www.youtube.com/watch?v=dOrELJQdj4Q&t=3404s" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/dOrELJQdj4Q/maxresdefault.jpg" alt="فيديو 4">
+                </a>
+                <a href="https://www.youtube.com/watch?v=pJ0auP7dbcY&t=711s" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/pJ0auP7dbcY/maxresdefault.jpg" alt="فيديو 5">
+                </a>
+             <a href="https://www.youtube.com/watch?v=lAxcOeXXyPQ&t=2s" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/lAxcOeXXyPQ/maxresdefault.jpg" alt="فيديو 5">
+                </a>
+				<a href="https://www.youtube.com/watch?v=Ggq2-z6bsyc&t=215s" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/Ggq2-z6bsyc/maxresdefault.jpg" alt="فيديو 1">
+                </a>
+				<a href="https://www.youtube.com/watch?v=J65ZEsHdqrs" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/J65ZEsHdqrs/maxresdefault.jpg" alt="فيديو 1">
+                </a>
+				<a href="https://www.youtube.com/watch?v=vBfIhYgpk7s" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/vBfIhYgpk7s/maxresdefault.jpg" alt="فيديو 1">
+                </a>
+				<a href="https://www.youtube.com/watch?v=7s7guGbssJY" target="_blank" class="video">
+                    <img src="https://img.youtube.com/vi/7s7guGbssJY/maxresdefault.jpg" alt="فيديو 1">
+                </a>
+				
+            </div>
+        </div>
+    </div>
+
+
+      <!-- قسم الأحداث القادمة -->
+<div class="event-section">
+    <h2 class="Lists-title toggle-btn">إنجازاتي وخدماتي</h2>
+    <div class="Lists-list">
+        <div class="event">
+            <h3>🚀 نجاحات التسويق الرقمي</h3>
+            <h4>زيادة معدلات التحويل بنسبة 250% لعملاء متعددين، وتحقيق عوائد تسويقية تجاوزت 500,000 ريال خلال عام واحد.</h4>
+        </div>
+
+        <div class="event">
+            <h3>📣 إنجازات الإعلانات</h3>
+            <h4>إدارة حملات إعلانية وصلت لأكثر من 10 ملايين مشاهدة، مع معدل تفاعل يتجاوز 15% عبر منصات التواصل الاجتماعي.</h4>
+        </div>
+
+        <div class="event">
+            <h3>✈️ تميز في خدمات السياحة</h3>
+            <h4>تنظيم أكثر من 50 رحلة سياحية فردية وجماعية، مع تقييمات إيجابية بنسبة 98% من العملاء.</h4>
+        </div>
+
+        <div class="event">
+            <h3>🎓 نجاحات القبولات الطلابية</h3>
+            <h4>مساعدة أكثر من 200 طالب في القبول بجامعات عالمية مرموقة في 15 دولة مختلفة.</h4>
+        </div>
+
+        <div class="event">
+            <h3>🌐 استشارات متميزة</h3>
+            <h4>تقديم أكثر من 500 ساعة استشارة متخصصة في السياحة والسفر لعملاء من 10 دول مختلفة.</h4>
+        </div>
+    </div>
+</div>
+    <script>
+        // جافا سكريبت للتحكم في إظهار وإخفاء القائمة
+        document.querySelector('.Lists-title').addEventListener('click', function() {
+            var ListsList = document.querySelector('.Lists-list');
+            var toggleBtn = document.querySelector('.toggle-btn');
+            ListsList.style.display = (ListsList.style.display === 'none' || ListsList.style.display === '') ? 'block' : 'none';
+            toggleBtn.classList.toggle('active');
+        });
+    </script>
+
+
+ 
+
+	<!-- قسم الحقوق -->
+	<body>
+	
+    <div class="footer">
+        <p>&copy; 2024 <a href="https://infinitypassage.github.io/">InPa-TBC</a>. PORWERED BY</p>
+    </div>
+</body>
+</html>
+
+
+
